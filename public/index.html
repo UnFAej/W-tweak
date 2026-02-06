@@ -1,1 +1,774 @@
+<!DOCTYPE html>
+<html lang="id">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>W Tweak - Optimasi Windows 10/11 Gratis | Hapus Bloatware & Tingkatkan Performa</title>
+    <meta name="title" content="W Tweak - Optimasi Windows 10/11 Gratis | Hapus Bloatware & Tingkatkan Performa">
+    <meta name="description"
+        content="Tool open-source gratis untuk mengoptimalkan Windows 10/11. Hapus bloatware, matikan telemetry, tingkatkan performa sistem dalam satu klik. Aman dengan fitur rollback otomatis.">
+    <meta name="keywords"
+        content="windows tweak, optimasi windows, hapus bloatware windows, matikan telemetry, windows 10 optimizer, windows 11 optimizer, debloat windows, speed up windows, w tweak">
+    <meta name="author" content="W Tweak">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://w-tweak.vercel.app/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://w-tweak.vercel.app/">
+    <meta property="og:title" content="W Tweak - Optimasi Windows 10/11 Gratis">
+    <meta property="og:description"
+        content="Tool open-source untuk mengoptimalkan Windows. Hapus bloatware, matikan telemetry, tingkatkan performa dalam satu klik.">
+    <meta property="og:site_name" content="W Tweak">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://w-tweak.vercel.app/">
+    <meta property="twitter:title" content="W Tweak - Optimasi Windows 10/11 Gratis">
+    <meta property="twitter:description"
+        content="Tool open-source untuk mengoptimalkan Windows. Hapus bloatware, matikan telemetry, tingkatkan performa dalam satu klik.">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#8b5cf6">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --primary-light: #a78bfa;
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --text: #e4e4e7;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --success: #22c55e;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-ascii {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.4rem, 1.5vw, 0.8rem);
+            color: var(--primary);
+            margin-bottom: 24px;
+            line-height: 1.2;
+            white-space: pre;
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--primary-light);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* Before After Section */
+        #before-after {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 50%, var(--bg-dark) 100%);
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .comparison-header {
+            padding: 16px 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .comparison-box.before .comparison-header {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .comparison-box.after .comparison-header {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--success);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .comparison-content {
+            padding: 24px;
+        }
+
+        .comparison-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-box.before .comparison-item .icon {
+            color: var(--danger);
+        }
+
+        .comparison-box.after .comparison-item .icon {
+            color: var(--success);
+        }
+
+        /* How to Use */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            border-color: var(--primary);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+        }
+
+        .step-content code {
+            background: var(--bg-dark);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary-light);
+        }
+
+        /* Download Section */
+        #download {
+            text-align: center;
+        }
+
+        .download-box {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.2);
+        }
+
+        .download-box h3 {
+            font-size: 1.75rem;
+            margin-bottom: 16px;
+        }
+
+        .download-box p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: var(--bg-dark);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary-light);
+            margin-bottom: 24px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .license-badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            margin-top: 16px;
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-ascii {
+                font-size: 0.35rem;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">W Tweak</a>
+            <ul class="nav-links">
+                <li><a href="#features">Fitur</a></li>
+                <li><a href="#before-after">Before/After</a></li>
+                <li><a href="#how-to-use">Cara Pakai</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-ascii">
+                ██╗ ██╗ ████████╗██╗ ██╗███████╗ █████╗ ██╗ ██╗
+                ██║ ██║ ╚══██╔══╝██║ ██║██╔════╝██╔══██╗██║ ██╔╝
+                ██║ █╗ ██║ ██║ ██║ █╗ ██║█████╗ ███████║█████╔╝
+                ██║███╗██║ ██║ ██║███╗██║██╔══╝ ██╔══██║██╔═██╗
+                ╚███╔███╔╝ ██║ ╚███╔███╔╝███████╗██║ ██║██║ ██╗
+                ╚══╝╚══╝ ╚═╝ ╚══╝╚══╝ ╚══════╝╚═╝ ╚═╝╚═╝ ╚═╝
+            </div>
+            <h1>Unleash Your Windows Potential</h1>
+            <p class="tagline">Tool open-source untuk mengoptimalkan Windows — hapus bloatware, matikan telemetry,
+                tingkatkan performa dalam satu klik.</p>
+            <div class="btn-group">
+                <a href="#download" class="btn btn-primary">
+                    ⬇ Download Gratis
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    Pelajari Lebih Lanjut
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Apa yang W Tweak Lakukan?</h2>
+            <p class="section-subtitle fade-in">Optimasi menyeluruh untuk Windows Anda</p>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Boost Performa</h3>
+                    <p>Matikan animasi, visual effects, dan background services yang memperlambat sistem. Power Plan
+                        otomatis diatur ke High Performance.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Privasi Terjaga</h3>
+                    <p>Nonaktifkan Windows Telemetry, Cortana, Activity History, dan tracking lainnya. Data Anda tetap
+                        milik Anda.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🗑️</div>
+                    <h3>Hapus Bloatware</h3>
+                    <p>Bersihkan 30+ aplikasi bawaan yang tidak perlu seperti Candy Crush, Xbox apps, Skype, dan
+                        lainnya.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Easy Rollback</h3>
+                    <p>Backup otomatis sebelum tweak. Jika ada masalah, kembalikan pengaturan dalam satu klik.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Windows 11 Ready</h3>
+                    <p>Kembalikan context menu klasik (klik kanan lama) dan hilangkan fitur Windows 11 yang mengganggu.
+                    </p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💾</div>
+                    <h3>Hemat Storage</h3>
+                    <p>Matikan hibernasi untuk menghemat 5-10GB ruang disk dan bersihkan file temporary otomatis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before After Section -->
+    <section id="before-after">
+        <div class="container">
+            <h2 class="section-title fade-in">Before vs After</h2>
+            <p class="section-subtitle fade-in">Lihat perbedaan nyata setelah menggunakan W Tweak</p>
+
+            <div class="comparison-container">
+                <div class="comparison-box before fade-in">
+                    <div class="comparison-header">
+                        <span>✗</span> Sebelum W Tweak
+                    </div>
+                    <div class="comparison-content">
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Telemetry: AKTIF</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Bloatware: 30+ apps</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Startup: Lambat</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>RAM Usage: Tinggi</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Cortana: Mengganggu</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Ads di Start Menu</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Animasi: Berat</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-box after fade-in">
+                    <div class="comparison-header">
+                        <span>✓</span> Sesudah W Tweak
+                    </div>
+                    <div class="comparison-content">
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Telemetry: MATI</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Bloatware: Bersih</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Startup: Cepat</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>RAM Usage: Optimal</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Cortana: Nonaktif</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>No Ads</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="icon">●</span>
+                            <span>Animasi: Ringan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="how-to-use">
+        <div class="container">
+            <h2 class="section-title fade-in">Cara Menggunakan</h2>
+            <p class="section-subtitle fade-in">Cuma 3 langkah, Windows langsung ngebut!</p>
+
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Download & Extract</h3>
+                        <p>Download file ZIP dan extract ke folder mana saja.</p>
+                    </div>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Run as Administrator</h3>
+                        <p>Klik kanan <code>RunTweak.bat</code> lalu pilih <strong>Run as administrator</strong>.</p>
+                    </div>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Pilih [1] dan Selesai!</h3>
+                        <p>Tekan <code>1</code> untuk menjalankan semua tweak. Restart Explorer atau PC setelah selesai.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download">
+        <div class="container">
+            <h2 class="section-title fade-in">Download W Tweak</h2>
+            <p class="section-subtitle fade-in">Gratis, open-source, dan aman digunakan</p>
+
+            <div class="download-box fade-in">
+                <div class="version-badge">v1.1 • Windows 10/11</div>
+                <h3>W Tweak Tool</h3>
+                <p>File ZIP berisi RunTweak.bat, WindowsTweak.ps1, dan README.md</p>
+                <a href="https://github.com/UnFAej/w-tweak/" class="btn btn-primary">
+                    ⬇ Download ZIP
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#features">Fitur</a>
+                <a href="#before-after">Before/After</a>
+                <a href="#how-to-use">Cara Pakai</a>
+                <a href="https://github.com/UnFAej/w-tweak">GitHub</a>
+            </div>
+            <p>Made with 💜 for Windows users</p>
+            <div class="license-badge">
+                Open Source • Non-Commercial License
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
